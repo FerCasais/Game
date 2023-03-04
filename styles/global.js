@@ -7,24 +7,22 @@ export const globalStyles = StyleSheet.create({
     
   },
   titleText: {
-   
+    textAlign: "center",
+    marginBottom: 10,
     fontFamily: "Nunito-Bold",
     fontSize: 25,
     color: "black",
     shadowColor: "#000",
       shadowOffset: {
       width: 2,
-      height: 32,
+      height: 4,
     },
     shadowOpacity: 0.88,
     shadowRadius: 36.0,
-   
     elevation: 54,
   },
   dice: {
-
-    fontSize: 40,
+    fontSize: 25,  
     textAlign: "center",
-
-  }
+   }
 });

@@ -2,14 +2,16 @@ import { Button, ImageBackground, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { globalStyles } from '../styles/global';
 
+
 const image = {uri: 'https://cloudfront-us-east-1.images.arcpublishing.com/infobae/EFDNZZ7FEEPSQNE4ATMVMKGXBE.jpg'};
 
 
+
+
 const Home = ({navigation}) => {
+    const onHandlerButton = () => {
 
-    const onHandlerButton = (  ) => {
-
-       navigation.navigate('ViewGame')
+          navigation.navigate('ViewGame');
 
     };
 
@@ -17,8 +19,10 @@ const Home = ({navigation}) => {
 
   return (
     <View style={globalStyles.container}>
-      <Text style={globalStyles.titleText}>Messi contra el mundo</Text>
-   <Button  title='Touch me for going to the game screen' onPress={onHandlerButton}/> 
+      <Text style={globalStyles.titleText}>Messi contra el Mundo</Text>
+      <View style={styles.playButton}>
+   <Button  title='Play !' onPress={onHandlerButton}/> 
+   </View>
    <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       
     </ImageBackground>
@@ -39,6 +43,17 @@ const styles = StyleSheet.create({
     },
     image: {
         flex: 1,
-    }
+    },
+    playButton: {
+      backgroundColor: 'gray',
+      width: '100%',
+      textAlign: 'center',
+      justifyContent: 'center',
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 10,
+
+    },
+
   });
 
