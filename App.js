@@ -1,14 +1,40 @@
 import { StatusBar } from 'expo-status-bar';
+import React, {useState} from 'react';
+import Home from './screens/home';
 import { StyleSheet, Text, View } from 'react-native';
+import * as Font from 'expo-font'
+import AppLoading from 'expo-app-loading';
+import Navigator from './routes/homeStack'
+
+const getFonts = () => Font.loadAsync({
+    'Nunito-Regular':require('./assets/fonts/Nunito-Regular.ttf'),
+    'Nunito-Bold': require('./assets/fonts/Nunito-Regular.ttf'),
+   
+  });
+
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+
+  if(fontsLoaded){
+    return (
+      <Navigator />
+    );
+  } else {
+    return (
+    <AppLoading
+     startAsync={getFonts}
+     onFinish={()=> setFontsLoaded(true)} 
+     onError={() => console.log('error')}
+    />
+    )
+  }
+
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -18,3 +44,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
