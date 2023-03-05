@@ -74,7 +74,7 @@ const ViewGame = () => {
       <View style={globalStyles.container}>
         <Text style={globalStyles.titleText}>Alcanzá la Copa..</Text>
         <View style={styles.imagePlayers}>
-          <Button title="Go! " onPress={onPress} />
+          <Button title="Go ! " onPress={onPress} />
           <Button title="App" onPress={onPress} /> 
         </View>
 
