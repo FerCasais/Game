@@ -1,16 +1,17 @@
 import {
-  Button,
   StyleSheet,
   Text,
   View,
   Image,
   ImageBackground,
+  Pressable,
 } from "react-native";
 import React, { useState } from "react";
 import { globalStyles } from "../styles/global";
 import { StatusBar } from "expo-status-bar";
 import { Video, AVPlaybackStatus } from "expo-av";
 import Card from "../shared/Card";
+import Button from "../shared/buttons";
 
 let sumDice = 0;
 let sumDiceApp = 0;
@@ -59,10 +60,19 @@ const ViewGame = () => {
     }
   };
 
+  const playAgain = () => {
+    setNumberRandom (0);
+    setNumberRandomApp(0);
+    sumDice = 0;
+    sumDiceApp = 0;
+
+  };
+
+  
   return (
     <>
       <View style={globalStyles.container}>
-        <Text style={globalStyles.titleText}>Ganale a Messi.. si podes..</Text>
+        <Text style={globalStyles.titleText}>Alcanzá la Copa..</Text>
         <View style={styles.imagePlayers}>
           <Button title="Go! " onPress={onPress} />
           <Button title="App" onPress={onPress} /> 
@@ -75,7 +85,7 @@ const ViewGame = () => {
               <Text style={styles.playersData} >Mbappé</Text>
               <Text style={styles.playersData}>{sumDice}</Text> 
               <Image
-                style={{ width: 150, height: 0 + sumDice * 1.2 }}
+                style={{ width: 150, height: 1 + sumDice * 1.2 }}
                 source={{
                   uri: "https://fotografias.antena3.com/clipping/cmsimages02/2022/12/05/614A45B8-99B8-42E4-A600-AAC3F8F9EB35/mbappe-partido-polonia_98.jpg?crop=3000,1688,x0,y0&width=1900&height=1069&optimize=low&format=webply",
                 }}
@@ -92,7 +102,7 @@ const ViewGame = () => {
             <Text style={styles.playersData}>{sumDiceApp}</Text>
             </View>
             <Image
-              style={{ width: 150, height: 0 + sumDiceApp * 1.2 }}
+              style={{ width: 150, height: 1 + sumDiceApp * 1.2 }}
               source={{
                 uri: "https://www.elgrafico.com.ar/media/cache/pub_news_details_large/media/i/99/7c/997c549db111e41eb57e2dec133bac22425de0f2.jpg",
               }}
@@ -100,7 +110,7 @@ const ViewGame = () => {
             <Text style={globalStyles.dice}>{numberRandomApp}</Text>
             </Card>
           </View>
-
+ 
         </View>
 
       </View>
@@ -113,6 +123,13 @@ const ViewGame = () => {
             uri: "https://www.entrelineas.info/media/cache/pub_news_details_large/media/i/7588440a6ad4c2ecdc56dc612cdde7e7f6d4c9bb.jpg",
           }}
         /></Card> 
+      </View>
+
+      
+      <View style={styles.viewButtonPlayAgain}>
+        <Button
+        title={'Play again' } onPress={playAgain} style={styles.buttonPlayAgain}></Button>
+       
       </View>
       <View style={styles.container}> 
         <Video
@@ -162,7 +179,7 @@ const styles = StyleSheet.create({
   video: {
     alignSelf: "center",
     width: 320,
-    height: 200,
+    height: 130,
   },
   buttons: {
     flexDirection: "row",
@@ -172,5 +189,5 @@ const styles = StyleSheet.create({
   playersData: {
     textAlign: "center",
   },
-  
+ 
 });

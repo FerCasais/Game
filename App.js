@@ -7,8 +7,11 @@ import AppLoading from 'expo-app-loading';
 import Navigator from './routes/homeStack'
 
 const getFonts = () => Font.loadAsync({
+    'RampartOne-Regular': require('./assets/fonts/RampartOne-Regular.ttf'),
     'Nunito-Regular':require('./assets/fonts/Nunito-Regular.ttf'),
     'Nunito-Bold': require('./assets/fonts/Nunito-Regular.ttf'),
+    
+  
    
   });
 

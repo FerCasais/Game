@@ -1,6 +1,8 @@
-import { Button, ImageBackground, StyleSheet, Text, View } from 'react-native'
+import { ImageBackground, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { globalStyles } from '../styles/global';
+import Card from '../shared/Card';
+import Button from '../shared/buttons';
 
 
 const image = {uri: 'https://cloudfront-us-east-1.images.arcpublishing.com/infobae/EFDNZZ7FEEPSQNE4ATMVMKGXBE.jpg'};
@@ -23,10 +25,8 @@ const Home = ({navigation}) => {
       <View style={styles.playButton}>
    <Button  title='Play !' onPress={onHandlerButton}/> 
    </View>
-   <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-      
-    </ImageBackground>
-   </View>
+      <ImageBackground source={image} resizeMode="cover" style={styles.image}></ImageBackground>
+    </View>
     
   )
 }
@@ -43,9 +43,10 @@ const styles = StyleSheet.create({
     },
     image: {
         flex: 1,
+       
     },
     playButton: {
-      backgroundColor: 'gray',
+      backgroundColor: '#cccc',
       width: '100%',
       textAlign: 'center',
       justifyContent: 'center',

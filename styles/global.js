@@ -3,15 +3,17 @@ import { StyleSheet } from "react-native";
 export const globalStyles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    padding: 10,
+    backgroundColor: '#e2e6ff',
+    
     
   },
   titleText: {
     textAlign: "center",
     marginBottom: 10,
-    fontFamily: "Nunito-Bold",
-    fontSize: 25,
-    color: "black",
+    fontFamily: "RampartOne-Regular",
+    fontSize: 27,
+    color: "#0c343d",
     shadowColor: "#000",
       shadowOffset: {
       width: 2,
