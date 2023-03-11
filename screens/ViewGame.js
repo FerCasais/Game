@@ -11,10 +11,7 @@ const ViewGame = ({ navigation }) => {
   const [numberRandom, setNumberRandom] = useState(0);
   const [numberRandomApp, setNumberRandomApp] = useState(0);
 
-  const goToGameOver = () => {
-    navigation.navigate("GameOver");
-  };
-
+  
   const playAgain = () => {
     setNumberRandom(0);
     setNumberRandomApp(0);
@@ -52,16 +49,24 @@ const ViewGame = ({ navigation }) => {
 
       setNumberRandom("Mbappé Looses");
     }
+
+  };const goToGameOver = () => {
+    if (sumDiceApp >= 150 || sumDice >= 150) {
+      navigation.navigate("GameOver");
+    }
+       
   };
+
 
   const onPress = () => {
     if (sumDiceApp < 150 && sumDice < 150) {
       onPressDiceHandler();
       onPressDiceHandlerApp();
-    } else if (sumDiceApp <= 150 || sumDice <= 150) {
-      goToGameOver();
-    }
+    } 
+
   };
+
+  goToGameOver()
 
   return (
     <>
@@ -69,7 +74,7 @@ const ViewGame = ({ navigation }) => {
         <Text style={globalStyles.titleText}>Alcanzá la Copa..</Text>
         <View style={styles.imagePlayers}>
           <Button title="Go !" onPress={onPress} />
-          <Button title="" onPress={onPress} />
+         
         </View>
 
         <View style={styles.imagePlayers}>
@@ -108,7 +113,7 @@ const ViewGame = ({ navigation }) => {
       <View style={styles.worldCup}>
         <Card>
           <Image
-            style={{ width: 110, height: 110 }}
+            style={{ width: 130, height: 160 }}
             source={{
               uri: "https://www.entrelineas.info/media/cache/pub_news_details_large/media/i/7588440a6ad4c2ecdc56dc612cdde7e7f6d4c9bb.jpg",
             }}
@@ -137,6 +142,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    
   },
 
   buttons: {
