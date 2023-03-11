@@ -29,7 +29,7 @@ const ViewGame = ({ navigation }) => {
 
     sumDice = numberRandom + sumDice;
 
-    if (sumDice >= 150) {
+    if (sumDice >= 120) {
       setNumberRandom("Mbappe Wins");
       setNumberRandomApp("Lio Looses");
     }
@@ -44,14 +44,14 @@ const ViewGame = ({ navigation }) => {
     setNumberRandomApp(generateNumberRandom);
 
     sumDiceApp = numberRandomApp + sumDiceApp;
-    if (sumDiceApp >= 150) {
+    if (sumDiceApp >= 120) {
       setNumberRandomApp("Messi Wins");
 
       setNumberRandom("Mbappé Looses");
     }
 
   };const goToGameOver = () => {
-    if (sumDiceApp >= 150 || sumDice >= 150) {
+    if (sumDiceApp >= 120 || sumDice >= 120) {
       navigation.navigate("GameOver");
     }
        
@@ -59,7 +59,7 @@ const ViewGame = ({ navigation }) => {
 
 
   const onPress = () => {
-    if (sumDiceApp < 150 && sumDice < 150) {
+    if (sumDiceApp < 120 && sumDice < 120) {
       onPressDiceHandler();
       onPressDiceHandlerApp();
     } 
@@ -135,6 +135,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     textAlign: "center",
     paddingVertical: 5,
+  
+    
   },
   worldCup: {
     flex: 1,
@@ -142,6 +144,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+   
     
   },
 
@@ -150,6 +153,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: "20%",
+    
   },
   playersData: {
     textAlign: "center",
