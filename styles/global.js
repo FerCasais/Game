@@ -10,7 +10,7 @@ export const globalStyles = StyleSheet.create({
   },
   titleText: {
     textAlign: "center",
-    marginBottom: 10,
+    marginBottom: '2%',
     fontFamily: "RampartOne-Regular",
     fontSize: 27,
     color: "#0c343d",

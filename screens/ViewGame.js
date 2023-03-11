@@ -1,26 +1,26 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ImageBackground,
-  Pressable,
-} from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import React, { useState } from "react";
 import { globalStyles } from "../styles/global";
-import { StatusBar } from "expo-status-bar";
-import { Video, AVPlaybackStatus } from "expo-av";
 import Card from "../shared/Card";
 import Button from "../shared/buttons";
 
 let sumDice = 0;
 let sumDiceApp = 0;
 
-const ViewGame = () => {
+const ViewGame = ({ navigation }) => {
   const [numberRandom, setNumberRandom] = useState(0);
   const [numberRandomApp, setNumberRandomApp] = useState(0);
-  const video = React.useRef(null);
-  const [status, setStatus] = React.useState({});
+
+  const goToGameOver = () => {
+    navigation.navigate("GameOver");
+  };
+
+  const playAgain = () => {
+    setNumberRandom(0);
+    setNumberRandomApp(0);
+    sumDice = 0;
+    sumDiceApp = 0;
+  };
 
   const onPressDiceHandler = () => {
     function generateNumberRandom(min, max) {
@@ -31,14 +31,14 @@ const ViewGame = () => {
     setNumberRandom(generateNumberRandom);
 
     sumDice = numberRandom + sumDice;
-    console.log(sumDice);
-    if (sumDice >= 150) {
-      setNumberRandom("You win");
-      setNumberRandomApp("Lio loose");
-    }
-  }; 
 
-  const onPressDiceHandlerApp = () => { 
+    if (sumDice >= 150) {
+      setNumberRandom("Mbappe Wins");
+      setNumberRandomApp("Lio Looses");
+    }
+  };
+
+  const onPressDiceHandlerApp = () => {
     function generateNumberRandom(min, max) {
       min = Math.ceil(1);
       max = Math.floor(6);
@@ -48,8 +48,9 @@ const ViewGame = () => {
 
     sumDiceApp = numberRandomApp + sumDiceApp;
     if (sumDiceApp >= 150) {
-      setNumberRandomApp("Messi win");
-      setNumberRandom("You loose");
+      setNumberRandomApp("Messi Wins");
+
+      setNumberRandom("Mbappé Looses");
     }
   };
 
@@ -57,33 +58,25 @@ const ViewGame = () => {
     if (sumDiceApp < 150 && sumDice < 150) {
       onPressDiceHandler();
       onPressDiceHandlerApp();
+    } else if (sumDiceApp <= 150 || sumDice <= 150) {
+      goToGameOver();
     }
   };
 
-  const playAgain = () => {
-    setNumberRandom (0);
-    setNumberRandomApp(0);
-    sumDice = 0;
-    sumDiceApp = 0;
-
-  };
-
-  
   return (
     <>
       <View style={globalStyles.container}>
         <Text style={globalStyles.titleText}>Alcanzá la Copa..</Text>
         <View style={styles.imagePlayers}>
-          <Button title="Go ! " onPress={onPress} />
-          <Button title="App" onPress={onPress} /> 
+          <Button title="Go !" onPress={onPress} />
+          <Button title="" onPress={onPress} />
         </View>
 
         <View style={styles.imagePlayers}>
-          
-            <View style={styles.container}>
-              <Card>
-              <Text style={styles.playersData} >Mbappé</Text>
-              <Text style={styles.playersData}>{sumDice}</Text> 
+          <View style={styles.container}>
+            <Card>
+              <Text style={styles.playersData}>Mbappé</Text>
+              <Text style={styles.playersData}>{sumDice}</Text>
               <Image
                 style={{ width: 150, height: 1 + sumDice * 1.2 }}
                 source={{
@@ -91,71 +84,40 @@ const ViewGame = () => {
                 }}
               />
               <Text style={globalStyles.dice}>{numberRandom}</Text>
-             </Card>
-            </View>
-          
+            </Card>
+          </View>
 
           <View style={styles.container}>
             <Card>
-              <View >
-            <Text style={styles.playersData}>Messi</Text>
-            <Text style={styles.playersData}>{sumDiceApp}</Text>
-            </View>
-            <Image
-              style={{ width: 150, height: 1 + sumDiceApp * 1.2 }}
-              source={{
-                uri: "https://www.elgrafico.com.ar/media/cache/pub_news_details_large/media/i/99/7c/997c549db111e41eb57e2dec133bac22425de0f2.jpg",
-              }}
-            />
-            <Text style={globalStyles.dice}>{numberRandomApp}</Text>
+              <View>
+                <Text style={styles.playersData}>Messi</Text>
+                <Text style={styles.playersData}>{sumDiceApp}</Text>
+              </View>
+              <Image
+                style={{ width: 150, height: 1 + sumDiceApp * 1.2 }}
+                source={{
+                  uri: "https://www.elgrafico.com.ar/media/cache/pub_news_details_large/media/i/99/7c/997c549db111e41eb57e2dec133bac22425de0f2.jpg",
+                }}
+              />
+              <Text style={globalStyles.dice}>{numberRandomApp}</Text>
             </Card>
           </View>
- 
         </View>
-
       </View>
 
       <View style={styles.worldCup}>
         <Card>
-        <Image
-          style={{ width: 110, height: 110 }}
-          source={{
-            uri: "https://www.entrelineas.info/media/cache/pub_news_details_large/media/i/7588440a6ad4c2ecdc56dc612cdde7e7f6d4c9bb.jpg",
-          }}
-        /></Card> 
-      </View>
-
-      
-      <View style={styles.viewButtonPlayAgain}>
-        <Button
-        title={'Play again' } onPress={playAgain} style={styles.buttonPlayAgain}></Button>
-       
-      </View>
-      <View style={styles.container}> 
-        <Video
-          ref={video}
-          style={styles.video}
-          source={{
-            uri: "https://img-9gag-fun.9cache.com/photo/a8qoK8e_460svvp9.webm",
-          }}
-          useNativeControls
-          resizeMode="contain"
-          isLooping
-          onPlaybackStatusUpdate={(status) => setStatus(() => status)}
-        />
-        <View style={styles.buttons}>
-          <Button
-            title={status.isPlaying ? "Pause" : "Play"}
-            onPress={() =>
-              status.isPlaying
-                ? video.current.pauseAsync()
-                : video.current.playAsync()
-            }
+          <Image
+            style={{ width: 110, height: 110 }}
+            source={{
+              uri: "https://www.entrelineas.info/media/cache/pub_news_details_large/media/i/7588440a6ad4c2ecdc56dc612cdde7e7f6d4c9bb.jpg",
+            }}
           />
-        </View>
-        
+        </Card>
       </View>
-      
+      <View style={styles.buttons}>
+        <Button title={"Play again"} onPress={playAgain}></Button>
+      </View>
     </>
   );
 };
@@ -174,20 +136,16 @@ const styles = StyleSheet.create({
     textAlign: "center",
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "flex-end",
+    alignItems: "center",
   },
-  video: {
-    alignSelf: "center",
-    width: 320,
-    height: 130,
-  },
+
   buttons: {
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "20%",
   },
   playersData: {
     textAlign: "center",
   },
- 
 });
